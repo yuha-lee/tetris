@@ -129,7 +129,7 @@ function update(time = 0) {
     
     draw();
     requestAnimationFrame(update);
-}
+}   
 
 const arena = createMatrix(12, 20);
 
