@@ -130,6 +130,7 @@ function playerDrop(high) {
     }
 
     if (collide(arena, player)) {
+        
         player.pos.y--;
         merge(arena, player);
         playerReset();
@@ -154,10 +155,10 @@ function playerReset() {
     player.pos.x = (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
 
     if (collide(arena, player)) {
-        player.isAlive = false;
-        arena.forEach(row => row.fill(0));
-        player.score = 0;
-        updateScore();
+        //player.isAlive = false;
+        //arena.forEach(row => row.fill(0));
+        //player.score = 0;
+        //updateScore();
     }
 }
 
@@ -213,7 +214,10 @@ function update(time = 0) {
     if (dropCounter > dropInterval) {
         playerDrop(1);
     }
-
+    // if (!collide(arena, player)) {
+    //     draw();
+    //     alert("game")
+    // }
     draw();
     requestAnimationFrame(update);
 }
@@ -283,7 +287,12 @@ document.addEventListener('keydown', event => {
 });
 
 document.getElementById("start").onclick = function() {
+    dropInterval = 1000;
+    player.score = 0;
+    updateScore();
+    arena.forEach(row => row.fill(0));
     playerReset();
-    updateScore();    
     update();
 }
+
+updateScore();
