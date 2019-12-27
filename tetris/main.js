@@ -45,42 +45,45 @@ function createPiece(type) {
     }
 }
 
-function updateScore() {
-    document.getElementById('score').innerText = tetris.player.score;
-}
+const tetri = [];
 
 const playerElements = document.querySelectorAll('.player');
 [...playerElements].forEach(element => {
-    const canvas = element.querySelector('canvas');
-    const tetris = new Tetris(canvas);
+    const tetris = new Tetris(element);
+    tetri.push(tetris);
+
+    setInterval((function interval() {
+        tetris.player.dropInterval *= 0.8;
+        return interval;
+    })(), 30000);
 });
 
-// document.addEventListener('keydown', event => {
-//     const player = tetris.player;
-//     switch(event.keyCode) {
-//         case 37 :               //left arrow
-//             player.move(-1);
-//             break; 
-//         case 39 :               //right arrow
-//             player.move(1);
-//             break; 
-//         case 40 :               //down arrow
-//             player.drop(1);
-//             break; 
-//         case 32 : 
-//             player.drop(0);      //drop to the bottom
-//             break;
-//         case 90 : 
-//             player.rotate(-1);   //rotate left
-//             break; 
-//         case 88 :
-//             player.rotate(1);    //rotate right
-//             break;
-//     }
-// });
+//44
 
-// updateScore();
-setInterval((function interval() {
-    tetris.player.dropInterval *= 0.8;
-    return interval;
-})(), 30000);
+document.addEventListener('keydown', event => {
+    [
+        [37, 39, 32, 90, 88, 40],
+    ].forEach((key, index) => {
+        const player = tetri[index].player;
+        switch(event.keyCode) {
+            case key[0] :               //left arrow
+                player.move(-1);
+                break; 
+            case key[1] :               //right arrow
+                player.move(1);
+                break; 
+            case key[2] : 
+                player.drop(0);      //drop to the bottom
+                break;
+            case key[3] : 
+                player.rotate(-1);   //rotate left
+                break; 
+            case key[4] :
+                player.rotate(1);    //rotate right
+                break;
+            case key[5] :               //down arrow
+                player.drop(1);
+                break;
+        }
+    });
+});

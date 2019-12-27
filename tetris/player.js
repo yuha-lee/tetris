@@ -80,15 +80,12 @@ class Player
             }
             
             if (this.pos.y <= 0) {
-                //console.log(this.pos.y, this.matrix.length);
-                //merge(this.arena, this);
-                alert('game over');
+                //game over
             } else {
                 this.arena.merge(this);
-                //console.log(this.pos.y, this.matrix.length);
                 this.reset();
-                this.arena.sweep();
-                updateScore();
+                this.score += this.arena.sweep();
+                this.tetris.updateScore(this.score);
             }
         }
         
