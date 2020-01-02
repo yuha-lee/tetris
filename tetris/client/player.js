@@ -5,6 +5,8 @@ class Player
         this.tetris = tetris;
         this.arena = tetris.arena;
 
+        this.events = new Events();
+
         this.dropCounter = 0;
         this.dropInterval = 1000;
         
@@ -72,21 +74,18 @@ class Player
                 this.pos.y++;
             }
         }
-    
+
+        this.dropCounter = 0;
+
         if (this.arena.collide(this)) {   
             this.pos.y--;
-            
-            if (this.pos.y <= 0) {
-                //game over
-            } else {
-                this.arena.merge(this);
-                this.reset();
-                this.score += this.arena.sweep();
-                this.tetris.updateScore(this.score);
-            }
+            this.arena.merge(this);
+            this.reset();
+            this.score += this.arena.sweep();
+            this.events.emit('score', this.score);
+            return;
         }
-        
-        this.dropCounter = 0;
+        this.events.emit('pos', this.pos);
     }
 
     move(dir) 
@@ -94,7 +93,9 @@ class Player
         this.pos.x += dir;
         if (this.arena.collide(this)) {
             this.pos.x -= dir;
+            return;
         }
+        this.events.emit('pos', this.pos);
     }
     
     rotate(dir) 
@@ -111,6 +112,7 @@ class Player
                 return; 
             }
         }
+        this.events.emit('matrix', this.matrix);
     }
 
     _rotateMatrix(matrix, dir) 
@@ -152,7 +154,10 @@ class Player
         if (this.arena.collide(this)) {
             this.arena.clear();
             this.score = 0;
-            this.tetris.updateScore(this.score);
+            this.events.emit('score', this.score);
         }
+
+        this.events.emit('pos', this.pos);
+        this.events.emit('matrix', this.matrix);
     }
 }
