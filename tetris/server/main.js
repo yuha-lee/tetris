@@ -46,7 +46,12 @@ function broadcastSession(session)
             type: 'session-broadcast',
             peers: {
                 you: client.id,
-                clients: clients.map(client => client.id),
+                clients: clients.map(client => {
+                    return {
+                        id: client.id,
+                        state: client.state
+                    }
+                })
             }
         });
     });
@@ -74,6 +79,8 @@ server.on('connection', conn => {
             client.state = data.state;
             broadcastSession(session);
         } else if (data.type === 'state-update') {
+            const [prop, value] = data.state;
+            client.state[data.fragment][prop] = value;
             client.broadcast(data);
         }
     })
