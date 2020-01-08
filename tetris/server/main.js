@@ -1,8 +1,28 @@
+const http = require('http');
 const WebSocketServer = require('ws').Server;
 const Session = require('./session');
 const Client = require('./client');
+const fs = require('fs');
 
-const server = new WebSocketServer({port: 9000});
+const server = http.createServer(function(req, res) {
+    let path = req.url;
+    if (path.startsWith('/')) {
+        path = path.substr(1, path.length);
+    }
+    fs.readFile(path, (error, data) => {
+        if (error) {
+            return console.error(error);
+        }
+        if (req.url.endsWith('.html')) {
+            res.writeHead(200, {'Content-Type' : 'text/html'});
+        } else if (req.url.endsWith('.js')) {
+            res.writeHead(200, {'Content-Type' : 'application/javascript; charset=utf-8'});
+        }
+        res.end(data, 'utf-8');
+    });
+}).listen(9000, '127.0.0.1');
+
+const ws = new WebSocketServer({ server });
 
 const sessions = new Map;
 
@@ -57,7 +77,7 @@ function broadcastSession(session)
     });
 }
 
-server.on('connection', conn => {
+ws.on('connection', conn => {
     console.log('Connection established');
     const client = createClient(conn);
 
