@@ -5,18 +5,15 @@ const Client = require('./client');
 const fs = require('fs');
 
 const server = http.createServer(function(req, res) {
-    let path = req.url;
-    if (path.startsWith('/')) {
-        path = path.substr(1, path.length);
-    }
+    const path = req.url.substr(1, req.url.length);
     fs.readFile(path, (error, data) => {
         if (error) {
             return console.error(error);
         }
-        if (req.url.endsWith('.html')) {
+        if (path.endsWith('.html')) {
             res.writeHead(200, {'Content-Type' : 'text/html'});
-        } else if (req.url.endsWith('.js')) {
-            res.writeHead(200, {'Content-Type' : 'application/javascript; charset=utf-8'});
+        } else if (path.endsWith('.js')) {
+            res.writeHead(200, {'Content-Type' : 'application/javascript'});
         }
         res.end(data, 'utf-8');
     });
