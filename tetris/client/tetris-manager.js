@@ -18,7 +18,7 @@ class TetrisManager
         const tetris = new Tetris(element);
         this.instances.add(tetris);
 
-        this.document.body.appendChild(tetris.element);
+        this.document.getElementById('content').appendChild(tetris.element);
 
         return tetris;
     }
@@ -26,13 +26,13 @@ class TetrisManager
     removePlayer(tetris)
     {
         this.instances.delete(tetris);
-        this.document.body.removeChild(tetris.element);
+        this.document.getElementById('content').removeChild(tetris.element);
     }
 
     sortPlayers(tetri)
     {
         tetri.forEach(tetris => {
-            this.document.body.appendChild(tetris.element);
+            this.document.getElementById('content').appendChild(tetris.element);
         });
     }
 }
