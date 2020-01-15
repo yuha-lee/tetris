@@ -119,6 +119,9 @@ class ConnectionManager
             this.updateManager(data.peers);
         } else if (data.type === 'state-update') {
             this.updatePeer(data.clientId, data.fragment, data.state);
+        } else if (data.type === 'chat') {
+            const log = document.getElementById('log');
+            log.innerHTML += data.content + "<br>";
         }
     }
 

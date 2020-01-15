@@ -99,6 +99,11 @@ ws.on('connection', conn => {
             const [prop, value] = data.state;
             client.state[data.fragment][prop] = value;
             client.broadcast(data);
+        } else if (data.type === 'chat') {
+            client.send({
+                type: 'chat',
+                content: data.content
+            });
         }
     })
 

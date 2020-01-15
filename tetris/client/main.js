@@ -1,15 +1,26 @@
 const tetrisManager = new TetrisManager(document);
+
 const localTetris = tetrisManager.createPlayer();
 localTetris.element.classList.add('local');
 localTetris.run();
 
+const send = document.querySelector('button');
 const connectionManager = new ConnectionManager(tetrisManager);
+
 connectionManager.connect('ws://localhost:9000');
+
+send.onclick = function() {
+    const text = document.getElementById('text').value;
+    connectionManager.send({
+        type: 'chat',
+        content: text
+    });
+}
 
 const keyListener = (event) => {
     [
         [37, 39, 32, 90, 88, 40],
-        [74, 76, 68, 65, 83, 75]
+        // [74, 76, 68, 65, 83, 75]
     ].forEach((key, index) => {
         const player = localTetris.player;
         if (event.type === 'keydown') {
