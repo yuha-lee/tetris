@@ -10,11 +10,12 @@ const connectionManager = new ConnectionManager(tetrisManager);
 connectionManager.connect('ws://localhost:9000');
 
 send.onclick = function() {
-    const text = document.getElementById('text').value;
+    const text = document.getElementById('text');
     connectionManager.send({
         type: 'chat',
-        content: text
+        content: text.value
     });
+    text.value = '';
 }
 
 const keyListener = (event) => {
@@ -42,4 +43,8 @@ const keyListener = (event) => {
 };
 
 document.addEventListener('keydown', keyListener);
-//document.addEventListener('keyup', keyListener);
+
+setInterval((function interval() {
+    localTetris.player.dropInterval *= 0.8;
+    return interval;
+})(), 60000);

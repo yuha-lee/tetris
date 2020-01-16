@@ -16,7 +16,7 @@ class Client
 
         data.clientId = this.id;
         this.session.clients.forEach(client => {
-            if (this === client) {
+            if (data.type !== 'chat' && this === client) {
                 return;
             }
             client.send(data);

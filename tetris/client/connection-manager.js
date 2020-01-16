@@ -121,7 +121,7 @@ class ConnectionManager
             this.updatePeer(data.clientId, data.fragment, data.state);
         } else if (data.type === 'chat') {
             const log = document.getElementById('log');
-            log.innerHTML += data.content + "<br>";
+            log.innerHTML += data.clientId + ">" + data.content + "<br>";
         }
     }
 
