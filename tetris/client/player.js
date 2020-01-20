@@ -8,7 +8,7 @@ class Player
         this.events = new Events();
 
         this.dropCounter = 0;
-        this.dropInterval = 1000;
+        this.dropInterval = 1500;
         
         this.pos = {x: 0, y: 0};
         this.matrix = null;
