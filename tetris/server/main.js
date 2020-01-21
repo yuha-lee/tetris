@@ -10,14 +10,13 @@ const server = http.createServer(function(req, res) {
         if (error) {
             return console.error(error);
         }
-        if (path.endsWith('.html')) {
             res.writeHead(200, {'Content-Type' : 'text/html'});
         } else if (path.endsWith('.js')) {
             res.writeHead(200, {'Content-Type' : 'application/javascript'});
         }
         res.end(data, 'utf-8');
     });
-}).listen(9000, '127.0.0.1');
+}).listen(9000);
 
 const ws = new WebSocketServer({ server });
 
