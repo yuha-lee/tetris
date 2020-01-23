@@ -93,6 +93,12 @@ ws.on('connection', conn => {
             });
         } else if (data.type === 'join-session') {
             const session = getSession(data.id) || createSession(data.id);
+            if (session.clients.size >= 5) {
+                client.send({
+                    type: 'join-failure',
+                    content: 'Cannot join the game: the game session is full'
+                });
+            }
             session.join(client);
             client.state = data.state;
             broadcastSession(session);

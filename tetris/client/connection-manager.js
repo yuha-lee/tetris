@@ -122,6 +122,9 @@ class ConnectionManager
         } else if (data.type === 'chat') {
             const log = document.getElementById('log');
             log.innerHTML += data.clientId + ">" + data.content + "<br>";
+        } else if (data.type === 'join-failure') {
+            alert(data.content);
+            window.open('about:blank','_self').self.close();
         }
     }
 
