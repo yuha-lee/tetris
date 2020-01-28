@@ -46,7 +46,7 @@ class ConnectionManager
         const local = this.localTetris;
 
         const player = local.player;
-        ['pos', 'matrix', 'score'].forEach(prop => {
+        ['pos', 'matrix'].forEach(prop => {
             player.events.listen(prop, value => {
                 this.send({
                     type: 'state-update',
@@ -103,11 +103,7 @@ class ConnectionManager
         const tetris = this.peers.get(id);
         tetris[fragment][prop] = value;
 
-        if (prop === 'score') {
-            tetris.updateScore(value);
-        } else {
-            tetris.draw();
-        }
+        tetris.draw();
     }
 
     receive(msg)

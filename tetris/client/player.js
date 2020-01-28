@@ -12,7 +12,6 @@ class Player
         
         this.pos = {x: 0, y: 0};
         this.matrix = null;
-        this.score = 0;
 
         this.reset();
     }
@@ -81,11 +80,18 @@ class Player
             this.pos.y--;
             this.arena.merge(this);
             this.reset();
-            this.score += this.arena.sweep();
-            this.events.emit('score', this.score);
+            this.arena.sweep();
             return;
         }
         this.events.emit('pos', this.pos);
+    }
+
+    gameover() {
+        this.arena.matrix[0].forEach((value) => {
+            if (value !== 0) {
+                return true;
+            }
+        });
     }
 
     move(dir) 
@@ -153,8 +159,6 @@ class Player
     
         if (this.arena.collide(this)) {
             this.arena.clear();
-            this.score = 0;
-            this.events.emit('score', this.score);
         }
 
         this.events.emit('pos', this.pos);
