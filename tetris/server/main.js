@@ -56,6 +56,11 @@ function getSession(id)
     return sessions.get(id);
 }
 
+function getAllSessions()
+{
+    return sessions;
+}
+
 function broadcastSession(session)
 {
     const clients = [...session.clients];
