@@ -3,23 +3,46 @@ const WebSocketServer = require('ws').Server;
 const Session = require('./session');
 const Client = require('./client');
 const fs = require('fs');
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
 
-const server = http.createServer(function(req, res) {
+app.use(bodyParser.urlencoded({extended : false}));
+app.all('/*', function(req, res) {
     const path = req.url.substr(1, req.url.length);
-    fs.readFile(path, (error, data) => {
-        if (error) {
-            return console.error(error);
-        }
+    if (req.method === 'POST') {
+        fs.readFile('./playground.html', 'utf8', function(error, data) {
+            if (error) {
+                return console.error(error);
+            }
 
-        if (path.endsWith('.html')) {
-            res.writeHead(200, {'Content-Type' : 'text/html'});
-        } else if (path.endsWith('.js')) {
-            res.writeHead(200, {'Content-Type' : 'application/javascript'});
-        }
-        res.end(data, 'utf-8');
-    });
-}).listen(9000);
+            const sessionName = "<input type='hidden' id='sessionName' value=" + req.body.sessionName + ">";
+            data = data.replace(/<(\/input|input)([^>]*)>/gi, sessionName);
 
+            fs.writeFile('./playground.html', data, 'utf8', function (error) {
+                if (error) {
+                    return console.log(error);
+                }
+             });
+
+            fs.readFile('./playground.html', (error, data) => {
+                if (error) {
+                    return console.error(error);
+                }
+                res.end(data, 'utf-8');
+            });
+        });
+    } else {
+        fs.readFile(path, (error, data) => {
+            if (error) {
+                return console.error(error);
+            }
+            res.end(data, 'utf-8');
+        });
+    }
+});
+
+const server = http.createServer(app).listen(9000);
 const ws = new WebSocketServer({ server });
 
 const sessions = new Map;
@@ -38,12 +61,13 @@ function createClient(conn, id = createId())
     return new Client(conn, id);
 }
 
-function createSession(id = createId()) 
+function createSession(id = createId(), name = 'tetris') 
 {
     if (sessions.has(id)) {
         throw new Error(`Session ${id} already exists`);
     }
-    const session = new Session(id);
+    console.log(name);
+    const session = new Session(id, name);
     console.log('Creating session', session);
 
     sessions.set(id, session);
@@ -54,11 +78,6 @@ function createSession(id = createId())
 function getSession(id) 
 {
     return sessions.get(id);
-}
-
-function getAllSessions()
-{
-    return sessions;
 }
 
 function broadcastSession(session)
@@ -89,18 +108,18 @@ ws.on('connection', conn => {
         const data = JSON.parse(msg);
 
         if (data.type === 'create-session') {
-            const session = createSession();
+            const session = createSession(data.id, data.name);
             session.join(client);
             client.state = data.state;
             client.send({
                 type: 'session-created',
-                id : session.id
+                id: session.id,
             });
         } else if (data.type === 'join-session') {
             const session = getSession(data.id) || createSession(data.id);
             if (session.clients.size >= 5) {
                 client.send({
-                    type: 'join-failure',
+                    type: 'join-failed',
                     content: 'Cannot join the game: the game session is full'
                 });
             }
@@ -117,6 +136,13 @@ ws.on('connection', conn => {
                 id: client.id,
                 content: data.content
             });
+        } else if (data.type === 'show-sessions') {
+            if (sessions) {
+                client.send({
+                    type: 'sessions',
+                    content: JSON.stringify([...sessions])
+                });
+            }
         }
     })
 
@@ -128,7 +154,7 @@ ws.on('connection', conn => {
             if (session.clients.size === 0) {
                 sessions.delete(session.id);
             }
+            broadcastSession(session);
         }
-        broadcastSession(session);
     });
 });

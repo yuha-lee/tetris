@@ -4,11 +4,13 @@ const localTetris = tetrisManager.createPlayer();
 localTetris.element.classList.add('local');
 localTetris.run();
 
-const send = document.querySelector('button');
 const connectionManager = new ConnectionManager(tetrisManager);
-
+// connectionManager.connect('ws://59.6.168.69:9000');
 connectionManager.connect('ws://localhost:9000');
 
+
+// chat
+const send = document.querySelector('button');
 send.onclick = function() {
     const text = document.getElementById('text');
     connectionManager.send({
@@ -18,10 +20,10 @@ send.onclick = function() {
     text.value = '';
 }
 
+// key events
 const keyListener = (event) => {
     [
         [37, 39, 32, 90, 88, 40],
-        // [74, 76, 68, 65, 83, 75]
     ].forEach((key, index) => {
         const player = localTetris.player;
         if (event.type === 'keydown') {
@@ -44,6 +46,7 @@ const keyListener = (event) => {
 
 document.addEventListener('keydown', keyListener);
 
+// shorten drop interval every 1 minute
 setInterval((function interval() {
     localTetris.player.dropInterval *= 0.8;
     return interval;

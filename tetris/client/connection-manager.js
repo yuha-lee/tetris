@@ -13,6 +13,7 @@ class ConnectionManager
         this.conn = new WebSocket(address);
         this.conn.addEventListener('open', () => {
             console.log('Connection established');
+            const state = this.localTetris.serialize();
             this.initSession();
             this.watchEvents();
         });
@@ -26,6 +27,7 @@ class ConnectionManager
     initSession()
     {
         const sessionId = window.location.hash.split('#')[1];
+        const sessionName = document.getElementById('sessionName').value;
         const state = this.localTetris.serialize();
         if (sessionId) {
             this.send({
@@ -36,6 +38,7 @@ class ConnectionManager
         } else {
             this.send({
                 type: 'create-session',
+                name: sessionName,
                 state,
             });
         }
@@ -118,7 +121,7 @@ class ConnectionManager
         } else if (data.type === 'chat') {
             const log = document.getElementById('log');
             log.innerHTML += data.clientId + ">" + data.content + "<br>";
-        } else if (data.type === 'join-failure') {
+        } else if (data.type === 'join-failed') {
             alert(data.content);
             window.open('about:blank','_self').self.close();
         }

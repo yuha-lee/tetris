@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>TETRIS</title>
+    <style>
+        #container {
+            width: 1150px;
+            height: 680px;
+            margin: 0px auto;
+            padding: 10px;
+            border: 1px solid #bcbcbc;
+        }
+        #header {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #bcbcbc;
+            height: 10%;
+        }
+        #content {
+            width: 835px;
+            padding: 10px;
+            margin-bottom: 10px;
+            float: left;
+            border: 1px solid #bcbcbc;
+            height: 68%;
+            display: flex;
+            justify-content: center;
+        }
+        #chat {
+            width: 260px;
+            padding: 10px 10px;
+            margin-bottom: 10px;
+            float: right;
+            border: 1px solid #bcbcbc;
+            height: 68%;
+        }
+        #footer {
+            clear: both;
+            padding: 10px;
+            border: 1px solid #bcbcbc;
+            height: 10%;
+        }
+        #log {
+            width: 255px;
+            height: 300px;
+            background-color: #f3f3f3;
+            margin-bottom: 10px;
+        }
+        .player {
+            flex: 1 1 auto;
+        }
+        .player.local canvas {
+            border: solid .2em #ce7373;
+        }
+        canvas {
+            border: solid .2em #f3f3f3;
+            height: 60vh;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <h1>TETRIS</h1>
+      </div>
+      <div id="content">
+        <template id="player-template">
+            <div class="player">
+                <canvas class="tetris" width="240" height="400"></canvas>
+            </div>
+        </template>  
+    </div>
+      <div id="chat">
+        <div id="log"></div>
+        <div id="send">
+            <input type='hidden' id='sessionName' value=ㄴㄹㅇㄴㅇㄹㄴㅇㄹ>
+            <button>Send</button> 
+        </div>
+      </div>
+      <div id="footer">
+        <p>footer</p>
+      </div>
+    </div>
+
+    <script src="client/tetris-manager.js"></script>
+    <script src="client/connection-manager.js"></script>
+    <script src="client/arena.js"></script>
+    <script src="client/events.js"></script>
+    <script src="client/player.js"></script>
+    <script src="client/tetris.js"></script>
+    <script src="client/playground.js"></script>
+</body>
+</html><input type='hidden' id='sessionName' value=ㄴㄹㅇㄴㅇㄹㄴㅇㄹ>
