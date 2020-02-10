@@ -16,7 +16,7 @@ app.all('/*', function(req, res) {
                 return console.error(error);
             }
 
-            const sessionName = "<input type='hidden' id='sessionName' value=" + req.body.sessionName + ">";
+            const sessionName = "<input type='hidden' id='sessionName' value='" + req.body.sessionName + "'>";
             data = data.replace(/<(\/input|input)([^>]*)>/gi, sessionName);
 
             fs.writeFile('./playground.html', data, 'utf8', function (error) {
@@ -137,10 +137,17 @@ ws.on('connection', conn => {
                 content: data.content
             });
         } else if (data.type === 'show-sessions') {
-            if (sessions) {
+            if (sessions.size > 0) {
+                for (let session of sessions) {
+                    client.send({
+                        type: 'sessions',
+                        content: JSON.stringify(session)
+                    });
+                }
+            } else {
                 client.send({
-                    type: 'sessions',
-                    content: JSON.stringify([...sessions])
+                    type: 'no-sessions',
+                    content: 'No sessions available'
                 });
             }
         }

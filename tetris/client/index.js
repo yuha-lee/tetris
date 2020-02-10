@@ -12,10 +12,14 @@ conn.addEventListener('message', event => {
     console.log('Received message', event.data);
     const data = JSON.parse(event.data);
     const games = document.getElementById('games');
-    if (data.content === '[]') {
-        games.innerHTML += '현재 열린 방이 없습니다.';
+    if (data.type === 'no-sessions') {
+        games.innerHTML += "<tr><td rowspan='2'>현재 열린 방이 없습니다.</td><tr>";
     } else {
-        games.innerHTML += data.content;
+        const sessionId = /(?<=\id\"\:\").+(?=\"\,\"n)/.exec(data.content);
+        const sessionName = /(?<=\e\"\:\").+(?=\"\,\"c)/.exec(data.content);
+        games.innerHTML += '<tr><td>' + sessionName 
+                        + '</td><td><input type="button" value="입장" onclick="location.href='
+                        + "'playground.html#" + sessionId + "'" + '">';
     }
 })
 
@@ -26,29 +30,6 @@ function createId(len = 6, chars = 'abcdefghjkmnopqrstwxyz0123456789')
         id += chars[Math.random() * chars.length | 0];
     }
     return id;
-}
-
-function initSession()
-{
-    const sessionId = createId();
-    const sessionName = document.getElementById('sessionName').value;
-    // console.log(sessionName);
-    // const state = this.localTetris.serialize();
-    // if (sessionId) {
-    //     this.send({
-    //         type: 'join-session',
-    //         id: sessionId,
-    //         // state,
-    //     });
-    // } else {
-        this.send({
-            type: 'create-session',
-            id: sessionId,
-            name: sessionName,
-            // state,
-        });
-    // }
-    location.href = 'playground.html#' + sessionId;
 }
 
 function send(data)
@@ -67,12 +48,3 @@ document.getElementById('new').onclick = function() {
 document.getElementsByClassName("close")[0].onclick = function() {
     document.getElementById('modal').style.display = "none";
 }
-
-// document.getElementById('create').onclick = function() {
-//     initSession();
-// }
-
-document.getElementById('join').onclick = function() {
-    location.href = 'playground.html';
-}
-
