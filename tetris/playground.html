@@ -50,9 +50,6 @@
         .player {
             flex: 1 1 auto;
         }
-        .player.local canvas {
-            border: solid .2em #ce7373;
-        }
         canvas {
             border: solid .2em #f3f3f3;
             height: 60vh;
@@ -60,6 +57,7 @@
     </style>
   </head>
   <body>
+    <input type='hidden' id='sessionName' value='ddd'>
     <div id="container">
       <div id="header">
         <h1>TETRIS</h1>
@@ -74,7 +72,7 @@
       <div id="chat">
         <div id="log"></div>
         <div id="send">
-            <input type='hidden' id='sessionName' value=ㄴㄹㅇㄴㅇㄹㄴㅇㄹ>
+            <input type='text' id='text'>
             <button>Send</button> 
         </div>
       </div>
@@ -91,4 +89,4 @@
     <script src="client/tetris.js"></script>
     <script src="client/playground.js"></script>
 </body>
-</html><input type='hidden' id='sessionName' value=ㄴㄹㅇㄴㅇㄹㄴㅇㄹ>
+</html>
