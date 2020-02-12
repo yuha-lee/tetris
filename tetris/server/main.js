@@ -17,7 +17,7 @@ app.all('/*', function(req, res) {
             }
 
             const sessionName = "<input type='hidden' id='sessionName' value='" + req.body.sessionName + "'>";
-            data = data.replace(/<(\/input|input)([^>]*)>/, sessionName);
+            data = data.replace(/<(\/input type='hidden'|input)([^>]*)>/, sessionName);
 
             fs.writeFile('./playground.html', data, 'utf8', function (error) {
                 if (error) {
