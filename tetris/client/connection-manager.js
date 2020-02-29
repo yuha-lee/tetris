@@ -13,7 +13,6 @@ class ConnectionManager
         this.conn = new WebSocket(address);
         this.conn.addEventListener('open', () => {
             console.log('Connection established');
-            const state = this.localTetris.serialize();
             this.initSession();
             this.watchEvents();
         });
@@ -90,9 +89,16 @@ class ConnectionManager
             }
         });
 
+        peers.clients.forEach((client, index) => {
+            if (client.id === me) {
+                peers.clients.splice(index, 1);
+            }
+        });
+        
         const sorted = peers.clients.map(client => {
             return this.peers.get(client.id) || this.localTetris;
         });
+
         this.tetrisManager.sortPlayers(sorted);
     }
 

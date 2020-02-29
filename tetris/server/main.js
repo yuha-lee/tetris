@@ -66,7 +66,6 @@ function createSession(id = createId(), name = 'tetris')
     if (sessions.has(id)) {
         throw new Error(`Session ${id} already exists`);
     }
-    console.log(name);
     const session = new Session(id, name);
     console.log('Creating session', session);
 

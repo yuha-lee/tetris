@@ -31,8 +31,8 @@ class TetrisManager
 
     sortPlayers(tetri)
     {
-        tetri.forEach(tetris => {
-            this.document.getElementById('content').appendChild(tetris.element);
+        tetri.forEach((tetris, index) => {
+            tetris.element.classList.add('player' + index);
         });
     }
 }

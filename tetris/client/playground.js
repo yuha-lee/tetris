@@ -24,7 +24,7 @@ send.onclick = function() {
 const keyListener = (event) => {
     [
         [37, 39, 32, 90, 88, 40],
-    ].forEach((key, index) => {
+    ].forEach(key => {
         const player = localTetris.player;
         if (event.type === 'keydown') {
             if (event.keyCode === key[0]) {

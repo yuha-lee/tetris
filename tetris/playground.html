@@ -3,83 +3,41 @@
   <head>
     <meta charset="utf-8">
     <title>TETRIS</title>
-    <style>
-        #container {
-            width: 1150px;
-            height: 680px;
-            margin: 0px auto;
-            padding: 10px;
-            border: 1px solid #bcbcbc;
-        }
-        #header {
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #bcbcbc;
-            height: 10%;
-        }
-        #content {
-            width: 835px;
-            padding: 10px;
-            margin-bottom: 10px;
-            float: left;
-            border: 1px solid #bcbcbc;
-            height: 68%;
-            display: flex;
-            justify-content: center;
-        }
-        #chat {
-            width: 260px;
-            padding: 10px 10px;
-            margin-bottom: 10px;
-            float: right;
-            border: 1px solid #bcbcbc;
-            height: 68%;
-        }
-        #footer {
-            clear: both;
-            padding: 10px;
-            border: 1px solid #bcbcbc;
-            height: 10%;
-        }
-        #log {
-            width: 255px;
-            height: 300px;
-            background-color: #f3f3f3;
-            margin-bottom: 10px;
-        }
-        .player {
-            flex: 1 1 auto;
-        }
-        canvas {
-            border: solid .2em #f3f3f3;
-            height: 60vh;
-        }
-    </style>
+    <link rel="stylesheet" href="playground.css">
   </head>
   <body>
-    <input type='hidden' id='sessionName' value='ddd'>
+    <input type='hidden' id='sessionName' value='123'>
     <div id="container">
-      <div id="header">
-        <h1>TETRIS</h1>
-      </div>
       <div id="content">
-        <template id="player-template">
-            <div class="player">
-                <canvas class="tetris" width="240" height="400"></canvas>
-            </div>
-        </template>  
-    </div>
-      <div id="chat">
-        <div id="log"></div>
-        <div id="send">
+        <div class="player0"></div>
+        <div class="player1"></div>
+        <div class="player2"></div>
+        <div class="player3"></div>
+        <div id="chat">
+          <div id="log"></div>
+          <div id="send">
             <input type='text' id='text'>
             <button>Send</button> 
+          </div>
+        </div>
+        <div class="menu">
+          <div>
+            <span>이동: 방향키</span>
+            <span>회전: z, x</span>
+            <span>드롭: spacebar</span>
+            <button id="start">시작</button>
+            <button id="quit">나가기</button>
+          </div>
         </div>
       </div>
-      <div id="footer">
-        <p>footer</p>
-      </div>
     </div>
+
+    <!-- template -->
+    <template id="player-template">
+      <div class="player">
+          <canvas class="tetris" width="240" height="400"></canvas>
+      </div>
+    </template>  
 
     <script src="client/tetris-manager.js"></script>
     <script src="client/connection-manager.js"></script>
