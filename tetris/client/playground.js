@@ -2,12 +2,18 @@ const tetrisManager = new TetrisManager(document);
 
 const localTetris = tetrisManager.createPlayer();
 localTetris.element.classList.add('local');
-localTetris.run();
 
 const connectionManager = new ConnectionManager(tetrisManager);
 // connectionManager.connect('ws://59.6.168.69:9000');
 connectionManager.connect('ws://localhost:9000');
 
+// start game when button is clicked
+const start = document.getElementById('start');
+start.onclick = function() {
+    connectionManager.send({
+        type: 'game-start'
+    });
+};
 
 // chat
 const send = document.querySelector('button');

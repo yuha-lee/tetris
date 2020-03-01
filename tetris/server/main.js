@@ -149,6 +149,10 @@ ws.on('connection', conn => {
                     content: 'No sessions available'
                 });
             }
+    } else if (data.type === 'game-start') {
+            client.broadcast({
+                type: 'game-start'
+            });
         }
     })
 

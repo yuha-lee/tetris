@@ -130,6 +130,8 @@ class ConnectionManager
         } else if (data.type === 'join-failed') {
             alert(data.content);
             window.open('about:blank','_self').self.close();
+        } else if (data.type === 'game-start') {
+            this.localTetris.run();
         }
     }
 
