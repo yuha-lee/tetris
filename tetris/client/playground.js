@@ -51,9 +51,3 @@ const keyListener = (event) => {
 };
 
 document.addEventListener('keydown', keyListener);
-
-// shorten drop interval every 1 minute
-setInterval((function interval() {
-    localTetris.player.dropInterval *= 0.8;
-    return interval;
-})(), 60000);

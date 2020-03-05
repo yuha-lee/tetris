@@ -9,6 +9,7 @@ class Tetris
 
         this.arena = new Arena(12, 20);    
         this.player = new Player(this);
+        this.isRunning = false;
 
         this.colors = [
             null,
@@ -59,6 +60,10 @@ class Tetris
     run()
     {
         this._update();
+        this.isRunning = true;
+        const interval = setInterval(function() {
+            this.player.dropInterval *= 0.8;
+        }.bind(this), 60000);
     }
 
     serialize()
@@ -78,7 +83,8 @@ class Tetris
     {
         this.arena = Object.assign(state.arena);
         this.player = Object.assign(state.player);
-        this.draw();
+        if (this.isRunning) {
+            this.draw();    
+        }
     }
-
 }
