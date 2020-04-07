@@ -20,6 +20,7 @@ class Tetris
             '#FF8E0D',
             '#FFE138',
             '#3877FF',
+            '#000000'
         ];
 
         let lastTime = 0;
@@ -39,19 +40,22 @@ class Tetris
         this.context.fillStyle = '#000';
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     
-        this.drawMatrix(this.arena.matrix, {x: 0, y:0});
+        this.drawMatrix(this.arena.matrix, {x: 0, y: 0});
         this.drawMatrix(this.player.matrix, this.player.pos);
     }
     
     drawMatrix(matrix, offset) 
     {
+        if (!matrix) {
+            return;
+        }
         matrix.forEach((row, y) => {
             row.forEach((value, x) => {
                 if (value !== 0) {
                     this.context.fillStyle = this.colors[value];
                     this.context.fillRect(x + offset.x, 
-                                     y + offset.y, 
-                                     1, 1);
+                                          y + offset.y, 
+                                          1, 1);
                 }
             });
         });
