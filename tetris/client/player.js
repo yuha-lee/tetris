@@ -12,6 +12,8 @@ class Player
         
         this.pos = {x: 0, y: 0};
         this.matrix = null;
+
+        this.reset();
     }
 
     createPiece(type) 

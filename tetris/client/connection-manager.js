@@ -131,7 +131,6 @@ class ConnectionManager
             alert(data.content);
             window.open('about:blank','_self').self.close();
         } else if (data.type === 'game-start') {
-            this.localTetris.player.reset();
             this.localTetris.run();
         }
     }

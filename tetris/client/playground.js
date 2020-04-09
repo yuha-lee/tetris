@@ -32,10 +32,6 @@ const keyListener = (event) => {
         [37, 39, 32, 90, 88, 40],
     ].forEach(key => {
         const player = localTetris.player;
-        if (!player.tetris.isRunning) {
-            return;
-        }
-
         if (event.type === 'keydown') {
             if (event.keyCode === key[0]) {
                 player.move(-1);    // left arrow
