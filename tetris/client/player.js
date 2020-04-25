@@ -12,8 +12,6 @@ class Player
         
         this.pos = {x: 0, y: 0};
         this.matrix = null;
-
-        this.reset();
     }
 
     createPiece(type) 
@@ -86,14 +84,6 @@ class Player
         this.events.emit('pos', this.pos);
     }
 
-    gameover() {
-        this.arena.matrix[0].forEach((value) => {
-            if (value !== 0) {
-                return true;
-            }
-        });
-    }
-
     move(dir) 
     {
         this.pos.x += dir;
@@ -143,6 +133,9 @@ class Player
 
     update(deltaTime)
     {
+        if (this.isGameOver()) {
+            return;
+        }
         this.dropCounter += deltaTime;
     
         if (this.dropCounter > this.dropInterval) {
@@ -150,15 +143,34 @@ class Player
         }
     }
 
+    isGameOver()
+    {
+        return this.arena.matrix[0].some(x => x !== 0);
+    }
+
     reset() 
     {
+        if (this.isGameOver()) {
+            return;
+        }
         const pieces = 'ILJOTSZ';
         this.matrix = this.createPiece(pieces[pieces.length * Math.random() | 0]);
         this.pos.y = 0;
         this.pos.x = (this.arena.matrix[0].length / 2 | 0) - (this.matrix[0].length / 2 | 0);
     
         if (this.arena.collide(this)) {
-            this.arena.clear();
+            let top = 0;
+            outer: for (let y = 0; y < this.matrix.length; ++y) {
+                for (let x = 0; x < this.matrix[y].length; ++x) {
+                    if (this.matrix[y][x] !== 0
+                        && (this.arena.matrix[y] && this.arena.matrix[y][x + this.pos.x]) !== 0) {
+                        top = y;
+                        break outer;
+                    }
+                }
+            }
+            this.pos.y = top - this.matrix.length;
+            this.arena.merge(this);
         }
 
         this.events.emit('pos', this.pos);

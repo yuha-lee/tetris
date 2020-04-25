@@ -20,6 +20,7 @@ class Tetris
             '#FF8E0D',
             '#FFE138',
             '#3877FF',
+            '#FFFFFF'
         ];
 
         let lastTime = 0;
@@ -59,8 +60,9 @@ class Tetris
 
     run()
     {
-        this._update();
         this.isRunning = true;
+        this.player.reset();
+        this._update();
         const interval = setInterval(function() {
             this.player.dropInterval *= 0.8;
         }.bind(this), 60000);

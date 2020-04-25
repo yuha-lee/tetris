@@ -32,7 +32,7 @@ const keyListener = (event) => {
         [37, 39, 32, 90, 88, 40],
     ].forEach(key => {
         const player = localTetris.player;
-        if (!player.tetris.isRunning) {
+        if (player.isGameOver()) {
             return;
         }
         if (event.type === 'keydown') {
