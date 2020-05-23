@@ -4,7 +4,6 @@ const localTetris = tetrisManager.createPlayer();
 localTetris.element.classList.add('local');
 
 const connectionManager = new ConnectionManager(tetrisManager);
-// connectionManager.connect('ws://59.6.168.69:9000');
 connectionManager.connect('ws://localhost:9000');
 
 // start game when button is clicked
