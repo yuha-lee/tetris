@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Tetris</title>
+</head>
+<body>
+   
+    <div class="container">
+        <!-- me -->
+        <div class="item player me">
+            <div class="item-header">Me</div>
+            <canvas width="360" height="600"></canvas>
+            <div class="item-btns">
+                <div class="invite">invite</div>
+                <div class="start">start</div>
+            </div>
+        </div>
+
+        <div class="chat-and-description">
+            <!-- description -->
+            <div class="item description">
+                <h2 class="title">TETRIS</h2>
+                <span class="sub-title">THE BEST GAME EVER</span>
+                <div class="content">
+                    <img src="./images/arrows.png"/>
+                    <img src="./images/spacebar.png"/>
+                </div>
+            </div>
+            <!-- chat -->
+            <div class="item chat">
+                <div class="item-header">chat</div>
+                <div class="chat-content"></div>
+                <div class="chat-input-wrapper">
+                    <input type="text" class="chat-input"/>
+                    <div class="chat-send-btn">SEND</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- you -->
+        <div class="item player you">
+            <div class="item-header">You</div>
+            <canvas class="tetris" width="360" height="600"></canvas>
+        </div>
+    </div>
+
+</body>
+<script src="client/events.js"></script>
+<script src="client/connectionManager.js"></script>
+<script src="client/tetrisManager.js"></script>
+<script src="client/tetris.js"></script>
+<script src="client/arena.js"></script>
+<script src="client/player.js"></script>
+<script src="client/index.js"></script>
+</html>

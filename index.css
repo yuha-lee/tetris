@@ -1,0 +1,142 @@
+body {
+    background-color: burlywood;
+    font-family: 'Press Start 2P';
+    font-size: 7pt;
+    display: flex;
+    align-items: center;
+    padding: 5vh;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    column-gap: 20px;
+    justify-content: center;
+}
+
+h2 {
+    font-size: 25pt;
+    text-align: center;
+    color: crimson;
+    text-shadow: 2px 3px #664c4c;
+    margin: 20px 0px 0px 0px;
+}
+
+canvas {
+    background-color: #303137;
+    width: 100%;
+    height: calc(100% - 25px);
+    border-radius: 5px;
+}
+
+.item {
+    box-shadow: 5px 5px 15px #664b2a;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: antiquewhite;
+    overflow: hidden;
+    position: relative;
+}
+
+.item-header {
+    height: 25px;
+    box-sizing: border-box;
+    color: gray;
+    padding: 5px;
+    font-size: 7pt;
+}
+
+.item-btns {
+    display: block;
+    position: absolute;
+    top: calc(50% - 60px);
+    left: calc(50% - 50px);
+    text-align: center;
+}
+
+.item-btns .invite,
+.item-btns .start {
+    width: 100px;
+    height: 10px;
+    font-size: 10px;
+    padding: 10px;
+    background-color: antiquewhite;
+    color: cornflowerblue;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px 0px;
+}
+
+.chat-and-description {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.description {
+    height: 235px;
+    color: cornflowerblue;
+    display: contents;
+}
+
+.description .sub-title {
+    font-size: 7pt;
+    line-height: 0;
+    text-align: center;
+}
+
+.description img {
+    max-width: 110px;
+    margin: 0px auto 15px auto;
+    display: block;
+}
+
+.chat {
+    height: calc(100% - 235px - 20px);
+}
+
+.chat-content {
+    height: calc(100% - 25px - 40px);
+    background-color: #303137;
+    border-radius: 5px;
+    overflow-y: auto;
+    color: white;
+    max-height: 310px;
+    max-width: 216px;
+}
+
+.chat-content-item {
+    word-break: break-all;
+    margin: 10px;
+}
+
+.chat-input-wrapper {
+    margin: 10px 0px 0px 2px;
+    display: flex;
+}
+
+.chat-send-btn {
+    font-size: 7pt;
+    background-color: burlywood;
+    color: gray;
+    width: 30%;
+    height: 12px;
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.chat-input {
+    width: 70%;
+}
+
+@media (max-width: 768px) {
+    .chat-and-description {
+        display: none;
+    }
+}
+
+.hide {
+    display: none;
+}
