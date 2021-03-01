@@ -1,7 +1,7 @@
 const tetrisManager = new TetrisManager(document);
 const localTetris = tetrisManager.createPlayer(true);
 const connectionManager = new ConnectionManager(tetrisManager);
-connectionManager.connect('ws://localhost:9000');
+connectionManager.connect('wss://yuha-tetris.azurewebsites.net:9000/');
 
 const keydownHandler = (event) => {
     if (localTetris.isOver) {

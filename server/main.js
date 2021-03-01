@@ -1,7 +1,11 @@
 const WebSocketServer = require('ws').Server;
+const Http = require('http');
 const Session = require('./session');
 const Client = require('./client');
-const server = new WebSocketServer({ port: 9000 });
+const httpServer = Http.createServer().listen(9000);
+const ws = new WebSocketServer({ server: httpServer });
+
+//const server = new WebSocketServer({ Server: server });
 
 const sessions = new Map;
 
@@ -67,7 +71,7 @@ function broadcastStart(client) {
     });
 };
 
-server.on('connection', conn => {
+ws.on('connection', conn => {
     console.log('====== Connection Established ======');
     const client = createClient(conn);
 
