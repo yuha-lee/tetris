@@ -1,0 +1,25 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "Good old Tetris! Made in Javascript",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ws": "^7.4.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuha-lee/tetris.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuha-lee/tetris/issues"
+  },
+  "homepage": "https://github.com/yuha-lee/tetris#readme"
+}
