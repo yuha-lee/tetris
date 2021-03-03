@@ -19,8 +19,7 @@ jobs:
     - name: Set up Node.js version
       uses: actions/setup-node@v1
       with:
-        node-version: '14.x'
-
+        node-version: '10.x'
     - name: npm install, build, and test
       run: |
         npm install
@@ -33,4 +32,9 @@ jobs:
         app-name: 'yuha-tetris'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_dcdee64d71754420bdbd3c5778e8dd60 }}
+    - task: AzureWebApp@1
+      inputs:
+        appName: 'yuha-tetris'
+        package: '$(System.DefaultWorkingDirectory)'
+        customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'
         package: .
