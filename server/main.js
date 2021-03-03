@@ -1,8 +1,12 @@
 const WebSocketServer = require('ws').Server;
+//const express = require('express');
+const http = require('http');
+//const app = express();
+//const httpServer = http.createServer(app).listen(9000);
+const ws = new WebSocketServer({ port: 9000 });
+
 const Session = require('./session');
 const Client = require('./client');
-//const ws = new WebSocketServer({ port: 9000 });
-const ws = new WebSocketServer({ noServer: true });
 const sessions = new Map;
 
 function createClient(conn, id = createId()) {
