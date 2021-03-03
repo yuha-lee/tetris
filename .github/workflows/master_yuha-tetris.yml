@@ -34,7 +34,7 @@ jobs:
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_dcdee64d71754420bdbd3c5778e8dd60 }}
     - task: AzureWebApp@1
       inputs:
-        appName: 'yuha-tetris'
-        package: '$(System.DefaultWorkingDirectory)'
-        customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'
-        package: .
+        azureSubscription: <Azure service connection>
+        appType: webAppLinux
+        appName: $(appName)
+        package: $(System.ArtifactsDirectory)/**/*.zip
