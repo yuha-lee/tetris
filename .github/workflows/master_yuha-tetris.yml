@@ -32,9 +32,3 @@ jobs:
         app-name: 'yuha-tetris'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_dcdee64d71754420bdbd3c5778e8dd60 }}
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: <Azure service connection>
-    appType: webAppLinux
-    appName: $(appName)
-    package: $(System.ArtifactsDirectory)/**/*.zip
