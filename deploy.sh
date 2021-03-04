@@ -115,6 +115,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   echo "Running $NPM_CMD install --production"
   #eval $NPM_CMD install --production
   #eval npm update
+  eval npm config set strict-ssl false
   eval npm update npm
   eval npm install node
   eval npm i
