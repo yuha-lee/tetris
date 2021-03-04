@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/yuha-lee/tetris/issues"
   },
-  "homepage": "https://github.com/yuha-lee/tetris#readme"
+  "homepage": "https://github.com/yuha-lee/tetris#readme",
+  "engines": {
+    "node": "^14.15.4"
+  }
 }
