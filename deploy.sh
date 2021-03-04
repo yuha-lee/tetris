@@ -118,6 +118,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd - > /dev/null
 fi
 
+npm install -g npm
 npm i
 node server.js
 
