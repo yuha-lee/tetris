@@ -1,8 +1,0 @@
-{
-    "appService.zipIgnorePattern": [
-        "node_modules{,/**}",
-        ".vscode{,/**}"
-    ],
-    "appService.defaultWebAppToDeploy": "/subscriptions/f8aa9442-1b04-45b1-8c6b-1dfbb3cb1b6c/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/yuha-tetris",
-    "appService.deploySubpath": "."
-}
