@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/yuha-lee/tetris#readme",
   "engines": {
-    "node": "^14.15.4"
+    "node": "14.15.0"
   }
 }
