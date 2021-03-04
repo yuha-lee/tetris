@@ -113,14 +113,14 @@ selectNodeVersion
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
   echo "Running $NPM_CMD install --production"
-  eval $NPM_CMD install --production
+  #eval $NPM_CMD install --production
+  eval npm install npm -g
+  eval npm install node
+  eval npm i
+  eval node server.js
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
-
-npm install -g npm
-npm i
-node server.js
 
 ##################################################################################################################################
 echo "Finished successfully."
