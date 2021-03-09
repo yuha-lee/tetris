@@ -112,11 +112,11 @@ selectNodeVersion
 # 3. Install npm packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
+  eval npm config set strict-ssl false
   eval npm cache clean -f
   eval npm install -g npm
   eval npm install -g n
   eval n stable
-  eval npm config set strict-ssl false
   echo "Running $NPM_CMD install --production"
   eval $NPM_CMD install --production
   #eval kill -9 `netstat -tnlp|grep 9000|gawk '{ print $7 }'|grep -o '[0-9]*'`
