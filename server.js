@@ -2,7 +2,7 @@ const WebSocketServer = require('ws').Server;
 const express = require('express');
 const http = require('http');
 const app = express();
-const httpServer = http.createServer(app).listen(9000);
+const httpServer = http.createServer(app).listen(3355);
 const ws = new WebSocketServer({ server: httpServer });
 
 const Session = require('./server/session');
