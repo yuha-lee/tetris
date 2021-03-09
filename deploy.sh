@@ -112,12 +112,10 @@ selectNodeVersion
 # 3. Install npm packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
+  eval npm-windows-upgrade -p -v latest
+  eval npm config set strict-ssl false
   echo "Running $NPM_CMD install --production"
   eval $NPM_CMD install --production
-  eval npm update
-  eval npm config set strict-ssl false
-  eval npm install node
-  eval npm i
   eval node server.js
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
