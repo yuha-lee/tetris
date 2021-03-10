@@ -115,7 +115,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   echo "Running $NPM_CMD install --production"
   #eval npm config set strict-ssl false
   eval $NPM_CMD install --production
-  eval node server.js
+  #eval node server.js
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
