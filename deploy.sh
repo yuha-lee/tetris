@@ -113,10 +113,8 @@ selectNodeVersion
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
   echo "Running $NPM_CMD install --production"
-  #eval npm config set strict-ssl false
-  echo $NPM_CMD
   eval $NPM_CMD install --production
-  #eval node server.js
+  eval node server.js
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
