@@ -3,7 +3,7 @@ const { Server } = require('ws');
 
 const PORT = process.env.PORT || 3000;
 const server = express()
-    .use('/', express.static('app', {index: 'index.html'}))
+    .use('/', express.static('tetris', {index: 'index.html'}))
     .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const ws = new Server({ server });
