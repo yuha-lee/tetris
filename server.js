@@ -1,5 +1,14 @@
-const WebSocketServer = require('ws').Server;
-const ws = new WebSocketServer({ port: process.env.PORT });
+const express = require('express');
+const { Server } = require('ws');
+
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html';
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const ws = new Server({ server });
 
 const Session = require('./server/session');
 const Client = require('./server/client');

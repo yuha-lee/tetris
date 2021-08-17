@@ -1,7 +1,7 @@
 const tetrisManager = new TetrisManager(document);
 const localTetris = tetrisManager.createPlayer(true);
 const connectionManager = new ConnectionManager(tetrisManager);
-connectionManager.connect('wss://yuha-tetris.herokuapp.com');
+connectionManager.connect('ws://yuha-tetris.herokuapp.com');
 
 const keydownHandler = (event) => {
     if (localTetris.isOver) {
